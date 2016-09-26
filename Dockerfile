@@ -1,4 +1,6 @@
-FROM ubuntu:16.04
+FROM quay.io/experimentalplatform/ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
