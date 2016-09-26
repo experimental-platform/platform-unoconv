@@ -9,13 +9,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     adduser --gecos "" --disabled-password protonet
 
-# ===========================================================
-# Install dumb-init for proper signal-processing
-# ===========================================================
-RUN update-ca-certificates && \
-    wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.1/dumb-init_1.1.1_amd64 && \
-    chmod +x /usr/local/bin/dumb-init
-
 EXPOSE 2002
 
 USER protonet
