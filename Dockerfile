@@ -11,6 +11,9 @@ RUN echo "deb http://httpredir.debian.org/debian jessie contrib" >> /etc/apt/sou
     rm -rf /var/lib/apt/lists/* && \
     adduser --gecos "" --disabled-password protonet
 
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64 && \
+    chmod +x /usr/local/bin/dumb-init    
+
 EXPOSE 2002
 
 USER protonet
