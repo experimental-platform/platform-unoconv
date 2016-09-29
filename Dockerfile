@@ -1,10 +1,9 @@
-FROM quay.io/experimentalplatform/ubuntu:latest
+FROM buildpack-deps:jessie
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list && \
-    echo "deb-src http://archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list && \
-    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && \
+RUN echo "deb http://httpredir.debian.org/debian jessie contrib" >> /etc/apt/sources.list && \
+    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
     apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get install -y unoconv wget ttf-mscorefonts-installer && \
