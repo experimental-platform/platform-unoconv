@@ -2,9 +2,12 @@ FROM quay.io/experimentalplatform/ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list && \
+    echo "deb-src http://archive.ubuntu.com/ubuntu/ xenial multiverse" >> /etc/apt/sources.list && \
+    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections && \
+    apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y unoconv wget && \
+    apt-get install -y unoconv wget ttf-mscorefonts-installer && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     adduser --gecos "" --disabled-password protonet
