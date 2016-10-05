@@ -1,0 +1,21 @@
+# Make monit run in foreground, see https://mmonit.com/monit/documentation/
+set init
+
+set daemon 10            # check services at 2-minute intervals
+  # with start delay 180     # optional: delay the first check by 4-minutes (by           
+  set logfile /dev/stdout
+  set idfile /var/lib/monit/id
+  set statefile /var/lib/monit/state
+  set eventqueue
+      basedir /var/lib/monit/events # set the base directory where events will be stored
+      slots 100                     # optionally limit the queue size
+
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost
+    allow localhost        # allow localhost to connect to the server and
+
+check process unoconv with pidfile /home/protonet/services/unoconv/supervise/pid
+  start program = "/usr/bin/sv start /home/protonet/services/unoconv" with timeout 60 seconds
+  stop program  = "/usr/bin/sv stop /home/protonet/services/unoconv"
+  if totalcpu > 10% for 9 cycles then restart
+  if totalmemory > 30% for 9 cycles then restart
