@@ -1,0 +1,4 @@
+#!/bin/bash -le
+exec 2>&1
+
+exec /usr/bin/monit -c /etc/monitrc

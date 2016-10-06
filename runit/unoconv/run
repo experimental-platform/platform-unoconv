@@ -1,0 +1,8 @@
+#!/bin/bash -le
+exec 2>&1
+
+# unoconv does not appropriately sacrifice it's children on shutdown
+# so we try to create a clean slate on (re)start
+killall soffice.bin || echo 'soffice not running, nothing to kill here'
+
+exec chpst -u protonet:protonet /usr/bin/unoconv --listener -vvvvv --port=2002 --server=0.0.0.0
