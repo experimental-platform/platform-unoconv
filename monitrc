@@ -18,4 +18,4 @@ check process unoconv with pidfile /home/protonet/services/unoconv/supervise/pid
   start program = "/usr/bin/sv start /home/protonet/services/unoconv" with timeout 60 seconds
   stop program  = "/usr/bin/sv stop /home/protonet/services/unoconv"
   if totalcpu > 10% for 9 cycles then restart
-  if totalmemory > 30% for 9 cycles then restart
+  if totalmemory > 10% for 9 cycles then restart
